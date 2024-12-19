@@ -4,14 +4,13 @@ var RequireObjectCoercible = require('es-object-atoms/RequireObjectCoercible');
 var callBound = require('call-bound');
 
 var $isEnumerable = callBound('Object.prototype.propertyIsEnumerable');
-var $push = callBound('Array.prototype.push');
 
 module.exports = function values(O) {
 	var obj = RequireObjectCoercible(O);
 	var vals = [];
 	for (var key in obj) {
 		if ($isEnumerable(obj, key)) { // checks own-ness as well
-			$push(vals, obj[key]);
+			vals[vals.length] = obj[key];
 		}
 	}
 	return vals;
